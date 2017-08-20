@@ -1,0 +1,29 @@
+<!-- WebComponent example based off element-boilerplate: https://github.com/webcomponents/element-boilerplate -->
+<template>
+    <style>
+        .coloured {
+            color: red;
+        }
+    </style>
+    <p>the first webcompnent is  <strong class="coloured">Hello World</strong></p>
+</template>
+<script>
+    (function() {
+        // Creates an object based in the HTML Element prototype
+        // 基于HTML Element prototype 创建obj
+        var element = Object.create(HTMLElement.prototype);
+        // 获取特mplate的内容
+        var template = document.currentScript.ownerDocument.querySelector('template').content;
+        // element创建完成之后的回调
+        element.createdCallback = function() {
+            // 创建 shadow root
+            var shadowRoot = this.createShadowRoot();
+            // 向root中加入模板
+            var clone = document.importNode(template, true);
+            shadowRoot.appendChild(clone);
+        };
+        document.registerElement('hellow-world', {
+            prototype: element
+        });
+    }());
+</script>
