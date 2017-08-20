@@ -11,27 +11,21 @@ Web Components是一个浏览器的新功能，提供了一个面向web包括下
 仅仅需要在HTML中加一个import 语句就可以了。   
 Web Components使用了一些新颖并且在开发中的浏览器功能。  
 
-The description above works fairly well at this moment in time, but it leaves out many other things that Web Components could be created for. With a Web Component, you can do almost anything that can be done with HTML, CSS and JavaScript, and it can be a portable component that can be re-used easily.
-
-Sometimes there is some confusion regarding Web Components and Google Polymer. Polymer is a framework that is based on Web Components technologies. You can make and use Web Components without Polymer.
 
 上面提到的部分当前在浏览器中可以正常的运行，但是有好多Web Components可以用来创造的部分没有被提及。  
 使用Web Components 你几乎可以来做任何可以使用HTML,CSS,JS能做到的事情，并且可以更便捷的被复用。  
 
 有时候关于Web Components和谷歌的plymer之间可能会存在一些困惑   
-简介而论，Polymer是基于Web Components技术的一个框架，你当然可以在不适用其的情况下开发Web Components    
-
-Web Components are not fully implemented in all browsers yet, and so to use them right now in most browsers (January 2015) you will probably need to use polyfills to fill in the gaps in browser coverage. Polyfills are available in the Google Polymer project. To find out which browsers implement Web Components, see Are We Componentized Yet?   
+简介而论，Polymer是基于Web Components技术的一个框架，你当然可以在不适用其的情况下开发Web Components      
 
 Web Components并没有被所有浏览器来实现(截止2017年chrome已经完全支持，其他浏览器还在投票表决中),因此如果在不支持的浏览器上使用Web Components， 
 应该使用由google polymer开发的 polyfills来达到目的。使用之前最好通过[Are We Componentized Yet](http://jonrimmer.github.io/are-we-componentized-yet/)查看浏览器兼容性。  
 
 
-Web Components consists of these four technologies (although each can be used separately):
 Web Components 包括以下四种技术(每种都可以被单独使用)  
 
-*  Custom Elements   
-*  HTML Templates  
+*  Custom Elements  自定义元素 
+*  HTML Templates  html模板
 *  Shadow DOM  
 *  HTML Imports  
 
@@ -51,4 +45,62 @@ Web Components 包括以下四种技术(每种都可以被单独使用)
 
 
 #### Shadow DOM
-===========
+    明确的定义如下：  
+    一种可以在document下组合多个同级别并且可以项目作用的DOM树的方法，因此可以更好完善DOM的构成   
+
+#### Custom Elements   
+     定义如下：  
+     一种可以允许开发者在document中定义并使用的新的dom元素类型，即自定义元素     
+
+#### HTML Templates   
+     模板没什么可说了，在标准实现之前其实我们一直都在用js来实现该方式
+#### HTML Imports  
+     一种允许一个html文档在别的htmldocuments中包含和复用的方法   
+
+## 如何使用 
+    接下看最直接的还是hello world 。直接上代码：
+#### index.html  
+```html
+   <!DOCTYPE>
+<html>
+    <head>
+        <title>webcomponent</title>
+        <link rel="import" href="./components/helloword.html" />
+    </head>
+    <body>
+        <hellow-world></hellow-world>
+    </body>
+</html> 
+```   
+#### helloworld.html  
+```html
+    <template>
+    <style>
+        .coloured {
+            color: red;
+        }
+    </style>
+    <p>the first webcompnent is  <strong class="coloured">Hello World</strong></p>
+</template>
+<script>
+    (function() {
+        // Creates an object based in the HTML Element prototype
+        // 基于HTML Element prototype 创建obj
+        var element = Object.create(HTMLElement.prototype);
+        // 获取特mplate的内容
+        var template = document.currentScript.ownerDocument.querySelector('template').content;
+        // element创建完成之后的回调
+        element.createdCallback = function() {
+            // 创建 shadow root
+            var shadowRoot = this.createShadowRoot();
+            // 向root中加入模板
+            var clone = document.importNode(template, true);
+            shadowRoot.appendChild(clone);
+        };
+        document.registerElement('hellow-world', {
+            prototype: element
+        });
+    }());
+</script>
+```        
+    
