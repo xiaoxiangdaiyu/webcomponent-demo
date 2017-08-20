@@ -102,5 +102,8 @@ Web Components 包括以下四种技术(每种都可以被单独使用)
         });
     }());
 </script>
-```        
+```     
+#### 运行结果  
+<img src='./helloworld.png'>
+
     
