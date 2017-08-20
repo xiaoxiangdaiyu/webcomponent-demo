@@ -1,8 +1,8 @@
 ## webcomponents中文文档  翻译自MDN
-============
+
 
 #### Web Components 是什么  
-=============
+
 Web Components是一个浏览器的新功能，提供了一个面向web包括下面几个方面标准的组件模型。    
 
 你可以认为Web Components是一个可复用的用户接口部件，  
