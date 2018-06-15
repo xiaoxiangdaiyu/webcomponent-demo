@@ -1,6 +1,6 @@
 ##  Web Components 中文文档  
    ### 文档
-   [传送门]('./doc.md')  
+   [传送门](doc.md)  
 
    ## 运行   
    ```js  
