@@ -1,8 +1,4 @@
-## webcomponents中文文档  翻译自MDN
-
-
-
-   ##  Web Components 中文文档  
+##  Web Components 中文文档  
    ### 文档
    [传送门]('./doc.md')  
 
